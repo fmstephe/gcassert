@@ -1,4 +1,4 @@
-module github.com/jordanlewis/gcassert
+module github.com/fmstephe/gcassert
 
 go 1.13
 
