@@ -3,7 +3,7 @@ package gcassert
 import (
 	"fmt"
 
-	"github.com/jordanlewis/gcassert/testdata/otherpkg"
+	"github.com/fmstephe/gcassert/testdata/otherpkg"
 )
 
 func inlinable(a int) int {
@@ -35,6 +35,7 @@ func (t test) neverInlinedMethod(n int) int {
 
 // This assertion makes sure that every callsite to alwaysInlined is in fact
 // inlined.
+//
 //gcassert:inline
 //go:noinline
 func alwaysInlined(a int) int {
