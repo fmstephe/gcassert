@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/jordanlewis/gcassert"
+	"github.com/fmstephe/gcassert"
 )
 
 func main() {
