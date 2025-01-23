@@ -68,12 +68,12 @@ func badDirective3() {
 			23: {directives: []assertDirective{bce}},
 		},
 		"testdata/inline.go": {
-			45: {inlinableCallsites: []passInfo{{colNo: 15}}},
-			49: {directives: []assertDirective{inline}},
-			51: {directives: []assertDirective{inline}},
-			55: {directives: []assertDirective{inline}},
-			57: {inlinableCallsites: []passInfo{{colNo: 36}}},
-			58: {inlinableCallsites: []passInfo{{colNo: 35}}},
+			46: {inlinableCallsites: []passInfo{{colNo: 15}}},
+			50: {directives: []assertDirective{inline}},
+			52: {directives: []assertDirective{inline}},
+			56: {directives: []assertDirective{inline}},
+			58: {inlinableCallsites: []passInfo{{colNo: 36}}},
+			59: {inlinableCallsites: []passInfo{{colNo: 35}}},
 		},
 		"testdata/noescape.go": {
 			11: {directives: []assertDirective{noescape}},
@@ -114,16 +114,16 @@ testdata/bce.go:8:	fmt.Println(ints[5]): Found IsInBounds
 testdata/bce.go:23:	fmt.Println(ints[1:7]): Found IsSliceInBounds
 testdata/bce.go:17:	sum += notInlinable(ints[i]): call was not inlined
 testdata/bce.go:19:	sum += notInlinable(ints[i]): call was not inlined
-testdata/inline.go:45:	alwaysInlined(3): call was not inlined
-testdata/inline.go:51:	sum += notInlinable(i): call was not inlined
-testdata/inline.go:55:	sum += 1: call was not inlined
-testdata/inline.go:58:	test(0).neverInlinedMethod(10): call was not inlined
-testdata/inline.go:60:	otherpkg.A{}.NeverInlined(sum): call was not inlined
-testdata/inline.go:62:	otherpkg.NeverInlinedFunc(sum): call was not inlined
+testdata/inline.go:46:	alwaysInlined(3): call was not inlined
+testdata/inline.go:52:	sum += notInlinable(i): call was not inlined
+testdata/inline.go:56:	sum += 1: call was not inlined
+testdata/inline.go:59:	test(0).neverInlinedMethod(10): call was not inlined
+testdata/inline.go:61:	otherpkg.A{}.NeverInlined(sum): call was not inlined
+testdata/inline.go:63:	otherpkg.NeverInlinedFunc(sum): call was not inlined
 testdata/issue5.go:4:	Gen().Layout(): call was not inlined
 `
 
-	testCases := []struct{
+	testCases := []struct {
 		name     string
 		pkgs     []string
 		cwd      string
