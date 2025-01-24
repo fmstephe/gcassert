@@ -76,11 +76,13 @@ func badDirective3() {
 			59: {inlinableCallsites: []passInfo{{colNo: 35}}},
 		},
 		"testdata/noescape.go": {
-			11: {directives: []assertDirective{noescape}},
-			18: {directives: []assertDirective{noescape}},
-			25: {directives: []assertDirective{noescape}},
-			33: {directives: []assertDirective{noescape}},
-			36: {directives: []assertDirective{noescape}},
+			13: {directives: []assertDirective{noescape}},
+			20: {directives: []assertDirective{noescape}},
+			27: {directives: []assertDirective{noescape}},
+			35: {directives: []assertDirective{noescape}},
+			38: {directives: []assertDirective{noescape}},
+			49: {directives: []assertDirective{noescape}},
+			57: {directives: []assertDirective{noescape}},
 		},
 		"testdata/issue5.go": {
 			4: {inlinableCallsites: []passInfo{{colNo: 14}}},
@@ -101,15 +103,23 @@ testdata/bad_directive.go:12:	//gcassert:inline,afterinline
 func badDirective3() {
 	badDirective2()
 }: unknown directive "afterinline"
-testdata/noescape.go:11:	foo := foo{a: 1, b: 2}: foo escapes to heap:
-testdata/noescape.go:25:	// This annotation should fail, because f will escape to the heap.
+testdata/noescape.go:13:	foo := foo{a: 1, b: 2}: foo escapes to heap:
+testdata/noescape.go:27:	// This annotation should fail, because f will escape to the heap.
 //
 //gcassert:noescape
 func (f foo) setA(a int) *foo {
 	f.a = a
 	return &f
 }: f escapes to heap:
-testdata/noescape.go:36:	: a escapes to heap:
+testdata/noescape.go:38:	: a escapes to heap:
+testdata/noescape.go:49:	// This annotation should fail, because the parameter f is leaked.
+// Specifically this means that if you call this method where f was a value
+// (not a pointer) then this will cause a heap allocation.
+//
+//gcassert:noescape
+func (f *foo) printReceiver() {
+	fmt.Printf("#v", f)
+}: leaking param: f
 testdata/bce.go:8:	fmt.Println(ints[5]): Found IsInBounds
 testdata/bce.go:23:	fmt.Println(ints[1:7]): Found IsSliceInBounds
 testdata/bce.go:17:	sum += notInlinable(ints[i]): call was not inlined
