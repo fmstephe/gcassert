@@ -82,6 +82,7 @@ func badDirective3() {
 			35: {directives: []assertDirective{noescape}},
 			38: {directives: []assertDirective{noescape}},
 			49: {directives: []assertDirective{noescape}},
+			57: {directives: []assertDirective{noescape}},
 		},
 		"testdata/issue5.go": {
 			4: {inlinableCallsites: []passInfo{{colNo: 14}}},

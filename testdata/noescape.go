@@ -49,3 +49,11 @@ func (f foo) returnA(
 func (f *foo) printReceiver() {
 	fmt.Printf("#v", f)
 }
+
+// This annotation should succeed, because the parameter f is not leaked.
+// This is because we don't pass the pointer value f, but its value (*f) instead.
+//
+//gcassert:noescape
+func (f *foo) printValue() {
+	fmt.Printf("#v", *f)
+}
