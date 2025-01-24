@@ -1,5 +1,7 @@
 package gcassert
 
+import "fmt"
+
 type foo struct {
 	a int
 	b int
@@ -37,4 +39,13 @@ func (f foo) returnA(
 	b int,
 ) *int {
 	return &a
+}
+
+// This annotation should fail, because the parameter f is leaked.
+// Specifically this means that if you call this method where f was a value
+// (not a pointer) then this will cause a heap allocation.
+//
+//gcassert:noescape
+func (f *foo) printReceiver() {
+	fmt.Printf("#v", f)
 }
